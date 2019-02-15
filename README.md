@@ -16,3 +16,18 @@ The SelfieLessActs application will allow users of the application to upload ima
 - Upvote a particular Act.
 - Upload an Act.
 - Delete an Act
+
+## Tools Used
+
+- **Django-REST-Framework** - to implement server side API endpoints.
+- **SQLite3** - DataBase system to store information about Acts.
+- **JavaScript** - To implement Client's Web App dynamically.
+- **XMLHttpRequest** - To make a request to server to get or post the data.
+
+## License
+
+This project is made available under the [MIT License](http://www.opensource.org/licenses/mit-license.php).
+
+## Credits 
+
+This project is being developed and maintained by [Nikhil V Revankar](https://github.com/nikhil3198), [Manjunath Badrannavar](https://github.com/mbbs4461) and [Nihal Pawar](https://github.com/NihalPawar).

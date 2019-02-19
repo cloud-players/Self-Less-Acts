@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+	<title>SelfieLessActs</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+	<style>
+	a{
+		text-decoration:NONE;
+	}
+	a:hover{
+		color: orange;
+	}
+	img{
+		height:220px;
+	}
+	</style>
+
+	<body>
+		{% load static %}
+		<div class="w3-top">
+			<div class="w3-bar w3-white w3-wide w3-padding w3-card" style="" >
+				<h1 style="padding-left: 10px;display: inline;width: 70%">SelfieLess<i>Acts</i></h1>
+				<a href="/mainpage.html"class="home">Home</a>
+			</div>
+		</div>
+
+		<div class="w3-content w3-padding" style="max-width:1564px;margin-top:100px">
+
+		  <div class="w3-container w3-padding-32" id="projects">
+		    <h3 class="w3-border-bottom w3-border-light-grey w3-padding-16">Categories</h3>
+		  </div>
+
+			<div class="w3-row-padding" style=";padding-bottom:40px">
+				{% if category_list %}
+				  	{% for category in category_list %}
+					<div class="w3-col l3 m6 w3-margin-bottom">
+						<div class="w3-display-container">
+							<div class="w3-display-topleft w3-black w3-padding"><a href="/categories/{{ category.name }}/">{{category.name}}</a></div>
+							<img src="{%static "category_img/"|add:category.name|add:".jpg" %}" alt="no img" style="width:100%">
+						</div>
+					</div>
+					{% endfor %}
+				{% else %}
+			    	<p>No categories are available.</p>
+				{% endif %}
+		  	</div>
+
+		</div>
+		<!-- End page content -->
+
+		<div style="padding:5px 30px 16px 34px">
+			<a href="/upload" style="text-decoration:NONE;font-size: 30px;font-weight: 400;">Wish to upload an Act ???
+			</a>
+		</div>
+		<footer class="w3-center w3-black w3-padding-16">
+			<p> © Copyright 2019 Shangri La - All Rights Reserved</p>
+		</footer>
+	</body>
+</html>
+
+<!--
+<!DOCTYPE html>
+<html>
+	<title>SelfieLessActs</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+	<style>
+		a{
+			text-decoration:NONE;
+		}
+		a:hover{
+		  color: orange;
+		}
+		img{
+			height:220px;
+		}
+	</style>
+
+	<body>
+		{% load static %}
+		<div class="w3-top">
+			<div class="w3-bar w3-white w3-wide w3-padding w3-card" >
+				<h1 style="text-align:center;padding:10px">SelfieLess<i>Acts</i></h1>
+			</div>
+		</div>
+
+		<div class="w3-content w3-padding" style="max-width:1564px;margin-top:100px">
+
+			<div class="w3-container w3-padding-32" id="projects">
+				<h3 class="w3-border-bottom w3-border-light-grey w3-padding-16">Categories</h3>
+			</div>
+
+			<div class="w3-row-padding" style=";padding-bottom:40px">
+			  	{% if category_list %}
+				  	{% for category in category_list %}
+					<div class="w3-col l3 m6 w3-margin-bottom">
+						<div class="w3-display-container">
+							<div class="w3-display-topleft w3-black w3-padding"><a href="/categories/{{ category.name }}/">																		{{category.name}}</a></div>
+							<img src="{%static "category_img/"|add:category.name|add:".jpg" %}" alt="House" style="width:100%">
+						</div>
+					</div>
+				    {% endfor %}
+			    {% else %}
+			    	<p>No categories are available.</p>
+				{% endif %}
+			</div>
+		</div>
+
+		<h3 style="margin-left: 10px;"><a href="/upload">&nbsp;&nbsp;Wish To Upload An Act???</a></h3>
+
+		<footer class="w3-center w3-black w3-padding-16">
+			<p> © Copyright 2019 Shangri La - All Rights Reserved</p>
+		</footer>
+		</div>
+	</body>
+</html>
+-->
+
+<!--
+{% if category_list %}
+    <ul>
+    {% for category in category_list %}
+        <li><a href="categories/{{ category.name }}/">{{ category.name }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No categories are available.</p>
+{% endif %}
+
+<li><a href="upload/">upload an act</a></li>
+
+<div class="w3-display-topleft w3-black w3-padding"><a href="/categories/{{ category.name }}/">																		{{category.name}}</a></div>
+-->

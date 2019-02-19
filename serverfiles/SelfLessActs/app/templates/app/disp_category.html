@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html>
+	<title>{{category_name.upper}}</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Karma">
+	<style>
+		body,h1,h2,h3,h4,h5,h6 {font-family: "Segoe UI",Arial,sans-serif}
+		.w3-bar-block .w3-bar-item {padding:20px}
+
+		img {
+			height:220px;
+		}
+		.button {
+		  background-color: #6f7880; /* Green */
+		  border: none;
+		  color: white;
+		  text-align: center;
+		  text-decoration: none;
+		  display: inline-block;
+		  font-size: 16px;
+		  margin: 4px 2px;
+		  -webkit-transition-duration: 0.4s; /* Safari */
+		  transition-duration: 0.4s;
+		  cursor: pointer;
+		}
+
+		.button {
+		  -webkit-transition-duration: 0.4s; /* Safari */
+		  transition-duration: 0.4s;
+		}
+
+		.button:hover {
+		  background-color: #4CAF50; /* Green */
+		  color: white;
+		}
+		.w3-quarter{
+		  height:400px;
+		  position: relative;
+		}
+		.w3-quarter .inner-div{
+		  bottom: 0;
+		  left:0;
+		  right: 0;
+		  position: absolute;
+		}
+		.home{
+		  text-decoration:NONE;
+		  right:0;
+		  position: absolute;
+		  padding: 18px 100px 0 0;
+		  font-weight: bold;
+		}
+		.home:hover{
+		  color: orange;
+		}
+		@media only screen and (max-width: 600px) {
+		  .home{
+		    display: NONE;
+		  }
+		}
+	</style>	
+
+	<body>
+		{% load static %}
+		<div class="w3-top">
+			<div class="w3-bar w3-white w3-wide w3-padding w3-card" style="" >
+				<h1 style="padding-left: 10px;display: inline;width: 70%">SelfieLess<i>Acts</i></h1>
+				<a href="/mainpage.html"class="home">Home</a>
+			</div>
+		</div>
+		<div class="w3-main w3-content w3-padding" style="max-width:1200px;margin-top: 100px;">
+			<h1 style='text-align:center'>{{category_name.upper}}</h1>
+			{% if act_list %}
+			<div class="w3-row-padding w3-padding-16 w3-center" id="food">
+				{% for act in act_list %}
+				
+			    	<div class="w3-quarter">
+						<img src="{% static act.img_path %}" alt="no img" style="width:100%">
+						<h3>{{ act.caption.capitalize }}</h3>
+						<div class="inner-div">
+							<button class="button" type="button">UpVote</button>
+							<button class="button" type="button">DownVote</button>
+							<button  class="button" type="button">Delete</button>
+			    		</div>
+			    	</div>
+				
+				{% endfor %}
+			</div>
+			{% else %}
+				<h2>No acts are available for this topic.</h2>
+			{% endif %}
+
+		  	<!-- Pagination -->
+			<div class="w3-center w3-padding-32">
+				<div class="w3-bar">
+					<a href="#" class="w3-bar-item w3-button w3-hover-black">«</a>
+					<a href="#" class="w3-bar-item w3-black w3-button">1</a>
+					<a href="#" class="w3-bar-item w3-button w3-hover-black">2</a>
+					<a href="#" class="w3-bar-item w3-button w3-hover-black">3</a>
+					<a href="#" class="w3-bar-item w3-button w3-hover-black">4</a>
+					<a href="#" class="w3-bar-item w3-button w3-hover-black">»</a>
+				</div>
+			</div>
+		</div>
+
+		<footer class="w3-center w3-black w3-padding-16">
+			<p> © Copyright 2019 Shangri La - All Rights Reserved</p>
+		</footer>
+	</body>
+</html>
+
+
+<!--
+<!DOCTYPE html>
+<html>
+	<title>Education</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Karma">
+	<style>
+		body,h1,h2,h3,h4,h5,h6 {font-family: "Karma", sans-serif}
+		.w3-bar-block .w3-bar-item {padding:20px}
+
+		img {
+			height:220px;
+		}
+		.button {
+		  background-color: #6f7880; /* Green */
+		  border: none;
+		  color: white;
+		  text-align: center;
+		  text-decoration: none;
+		  display: inline-block;
+		  font-size: 16px;
+		  margin: 4px 2px;
+		  -webkit-transition-duration: 0.4s; /* Safari */
+		  transition-duration: 0.4s;
+		  cursor: pointer;
+		}
+
+		.button {
+		  -webkit-transition-duration: 0.4s; /* Safari */
+		  transition-duration: 0.4s;
+		}
+
+		.button:hover {
+		  background-color: #4CAF50; /* Green */
+		  color: white;
+		}
+		.w3-quarter{
+		  height:400px;
+		  position: relative;
+		}
+		.w3-quarter .inner-div{
+		  bottom: 0;
+		  left:0;
+		  right: 0;
+		  position: absolute;
+		}
+		.home{
+		  text-decoration:NONE;
+		  right:0;
+		  position: absolute;
+		  padding: 18px 100px 0 0;
+		  font-weight: bold;
+		}
+		.home:hover{
+		  color: orange;
+		}
+		@media only screen and (max-width: 600px) {
+		  .home{
+		    display: NONE;
+		  }
+		}
+	</style>
+	
+	<body>
+	{% load static %}
+		<div class="w3-top">
+			<div class="w3-bar w3-white w3-wide w3-padding w3-card" style="" >
+				<h1 style="padding-left: 10px;display: inline;width: 70%">SelfieLess<i>Acts</i></h1>
+				<a href="/mainpage"class="home">Home</a>
+			</div>
+		</div>
+
+		
+		<div class="w3-main w3-content w3-padding" style="max-width:1200px;margin-top: 100px;">
+			<h1 style='text-align:center'>{{category_name.upper}}</h1>
+			{% if act_list %}
+				{% for act in act_list %}
+				<div class="w3-row-padding w3-padding-16 w3-center" id="food">
+					<div class="w3-quarter">
+						<img src="{% static act.img_path %}" alt="Sandwich" style="width:100%">
+						<h3>{{ act.caption.capitalize }}</h3>
+						<div class="inner-div">
+							<button class="button" type="button">UpVote</button>
+							<button class="button" type="button">DownVote</button>
+							<button  class="button" type="button">Delete</button>
+						</div>
+					</div>
+				</div>
+				{% endfor %}
+			{% else %}
+				<h2>No acts are available for this topic.</h2>
+			{% endif %}
+
+
+			
+			<div class="w3-center w3-padding-32">
+			    <div class="w3-bar">
+					<a href="#" class="w3-bar-item w3-button w3-hover-black">«</a>
+					<a href="#" class="w3-bar-item w3-black w3-button">1</a>
+					<a href="#" class="w3-bar-item w3-button w3-hover-black">2</a>
+					<a href="#" class="w3-bar-item w3-button w3-hover-black">3</a>
+					<a href="#" class="w3-bar-item w3-button w3-hover-black">4</a>
+					<a href="#" class="w3-bar-item w3-button w3-hover-black">»</a>
+			    </div>
+			</div>
+		</div>
+
+		<h3 style="margin-left: 10px;"><a href="/upload">&nbsp;&nbsp;Wish To Upload An Act???</a></h3>
+
+		<footer class="w3-center w3-black w3-padding-16">
+		  <p> © Copyright 2019 Shangri La - All Rights Reserved</p>
+		</footer>
+	</body>
+</html>
+-->
+
+<!--
+{% if act_list %}
+	<ul>
+	{% for act in act_list %}
+		<li><a href="/{{category_name}}/acts/{{act.act_id}}/">{{ act.caption }}</a></li>
+	{% endfor %}
+	</ul>
+{% else %}
+	<p>No acts are available.</p>
+{% endif %}
+
+<li><a href="upload/">upload an act</a></li>
+
+<img src="{% static act.img_path %}" alt="Sandwich" style="width:100%">
+						<h3>{{ act.caption.capitalize }}</h3>
+-->

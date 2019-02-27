@@ -22,7 +22,7 @@ class user(models.Model):
 class act(models.Model):
 	"""docstring for Act"""
 	act_id = models.IntegerField(primary_key=True)
-	username = models.ForeignKey(user, default='johndoe', on_delete=models.SET_DEFAULT)
+	username = models.ForeignKey(user, default='johndoe==', on_delete=models.SET_DEFAULT)
 	pub_datetime = models.DateTimeField(default=django.utils.timezone.now)
 	caption = models.CharField(max_length=200)
 	upvotes = models.IntegerField(default=0)

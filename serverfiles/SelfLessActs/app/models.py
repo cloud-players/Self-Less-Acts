@@ -6,10 +6,10 @@ from django.conf import settings
 # Create your models here.
 class category(models.Model):
 	"""docstring for category"""
-	name = models.CharField(max_length=50, primary_key=True)
-	count = models.IntegerField(default=0)
+	categoryName = models.CharField(max_length=50, primary_key=True)
+	categoryCount = models.IntegerField(default=0)
 	def __str__(self):
-		return "%s" %(self.name)
+		return "%s" %(self.categoryName)
 
 class user(models.Model):
 	"""docstring for user"""
@@ -21,14 +21,14 @@ class user(models.Model):
 
 class act(models.Model):
 	"""docstring for Act"""
-	act_id = models.IntegerField(primary_key=True)
+	actId = models.IntegerField(primary_key=True)
 	username = models.ForeignKey(user, default='johndoe==', on_delete=models.SET_DEFAULT)
-	pub_datetime = models.DateTimeField(default=django.utils.timezone.now)
+	timestamp = models.DateTimeField(default=django.utils.timezone.now)
 	caption = models.CharField(max_length=200)
 	upvotes = models.IntegerField(default=0)
-	img_path = models.CharField(max_length=200)
-	category = models.ForeignKey(category, on_delete=models.CASCADE)
+	imgB64 = models.CharField(max_length=1000)
+	categoryName = models.ForeignKey(category, on_delete=models.CASCADE)
 
 
 	def __str__(self):
-		return "%d, %s, %s" %(self.act_id, self.img_path, self.caption)
+		return "%d, %s, %s" %(self.actId, self.imgB64, self.caption)

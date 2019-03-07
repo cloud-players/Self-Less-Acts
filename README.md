@@ -25,7 +25,7 @@ The SelfieLessActs application will allow users of the application to upload ima
 - **XMLHttpRequest** - To make a request to server to get or post the data.
 
 ## Stepts to build any project from the list of projects/microservices in serverfiles
-- django-admin startproject <project_name>
+- cd serverfiles
 - python <project_name>/manage.py makemigrations
 - python <project_name>/manage.py migrate
 - python <project_name>/manage.py runserver 0:<port_number>

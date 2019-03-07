@@ -1,4 +1,4 @@
-# Selfie-Less-Acts
+# Self-Less-Acts
 A photo sharing web app being hosted on AWS Cloud.
 
 SelfieLessActs app is used to store information about anything that is good for the society that we observe.

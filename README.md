@@ -23,12 +23,12 @@ The SelfieLessActs application will allow users of the application to upload ima
 - **JavaScript** - To implement Client's Web App dynamically.
 - **XMLHttpRequest** - To make a request to server to get or post the data.
 
-## steps to install required libraries
+## Steps to install required libraries
 - cd serverfiles
 - sudo apt install python3-pip
 - pip install -r requirements.txt
 
-## Stepts to build any project from the list of projects/microservices in serverfiles
+## Steps to build any project from the list of projects/microservices in serverfiles
 - cd serverfiles
 - python <project_name>/manage.py makemigrations
 - python <project_name>/manage.py migrate

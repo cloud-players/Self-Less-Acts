@@ -24,16 +24,39 @@ The SelfieLessActs application will allow users of the application to upload ima
 - **XMLHttpRequest** - To make a request to server to get or post the data.
 
 ## Steps to install required libraries
-- cd serverfiles
-- sudo apt install python3-pip
-- pip install -r requirements.txt
+```$ cd serverfiles```
+
+```$ sudo apt install python3-pip```
+
+```$ pip install -r requirements.txt```
 
 ## Steps to build any project from the list of projects/microservices in serverfiles
-- cd serverfiles
-- python <project_name>/manage.py makemigrations
-- python <project_name>/manage.py migrate
-- python <project_name>/manage.py runserver 0:<port_number>
+```$ cd serverfiles```
 
+```$ python <project_name>/manage.py makemigrations```
+
+```$ python <project_name>/manage.py migrate```
+
+```$ python <project_name>/manage.py runserver 0:<port_number>```
+
+## Steps to build docker images and publish it into docker_hub repository
+``` $ cd <project_name>```
+
+``` $ docker pull alpine:3.7```
+
+``` $ docker build -t <project_name> .```
+
+``` $ docker tag <project_name> <dockerID>/<project_name>:latest```
+
+``` $ docker push <dockerID>/<project_name>:latest```
+
+## Steps to run docker container from remote repository
+``` $ cd <project_name>```
+
+``` $ docker-compose up```
+
+## To run container in detached (background) mode
+``` $ docker-compose up -d```
 
 ## License
 

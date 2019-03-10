@@ -20,6 +20,7 @@ The SelfLessActs application will allow users of the application to upload image
 ## Tools Used
 - **Django-REST-Framework** - to implement server side API endpoints.
 - **SQLite3** - DataBase system to store information about Acts.
+- **Docker-Container** - To implement microservices.
 - **JavaScript** - To implement Client's Web App dynamically.
 - **XMLHttpRequest** - To make a request to server to get or post the data.
 

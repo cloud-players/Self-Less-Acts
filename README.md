@@ -39,10 +39,11 @@ The SelfieLessActs application will allow users of the application to upload ima
 
 ```$ python <project_name>/manage.py runserver 0:<port_number>```
 
-## Steps to build docker images and publish it into docker_hub repository
-``` $ cd <project_name>```
-
+## To pull alpine:3.7 image
 ``` $ docker pull alpine:3.7```
+
+## Steps to build docker images and publish it into docker_hub repository
+``` $ cd serverfiles/dockerized app-services/<project_name>```
 
 ``` $ docker build -t <project_name> .```
 
@@ -51,7 +52,7 @@ The SelfieLessActs application will allow users of the application to upload ima
 ``` $ docker push <dockerID>/<project_name>:latest```
 
 ## Steps to run docker container from remote repository
-``` $ cd <project_name>```
+``` $ cd serverfiles/dockerized app-services/<project_name>```
 
 ``` $ docker-compose up```
 

@@ -26,9 +26,7 @@ The SelfLessActs application will allow users of the application to upload image
 
 ## Steps to install required libraries
 ```$ cd serverfiles```
-
 ```$ sudo apt install python3-pip```
-
 ```$ pip install -r requirements.txt```
 
 ## Steps to build any project from the list of projects/microservices in serverfiles

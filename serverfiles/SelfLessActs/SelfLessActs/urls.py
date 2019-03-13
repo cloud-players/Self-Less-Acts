@@ -19,7 +19,7 @@ from app.views import *
 
 urlpatterns = [
 	path('admin/', admin.site.urls),
-	path('api/v1/users', AddUser, name='AddUser'),
+	path('api/v1/users', ListAll_Add_User, name='ListAll_Add_User'),
 	path('api/v1/users/<username>', RemoveUser, name='RemoveUser'),
 	path('api/v1/categories', ListAll_Add_Category, name='ListAll_Add_Category'),
 	path('api/v1/categories/<categoryName>/acts/size', NumberOfActsInCategory, name='NumberOfActsInCategory'),

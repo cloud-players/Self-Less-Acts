@@ -9,8 +9,9 @@ from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from rest_framework.status import *
 import json
+import requests
 
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+#user_service_ip = "http://localhost:8080"
 
 def dt_tm(dt, s2o=None, o2s=None):
 	print(dt)
@@ -21,55 +22,6 @@ def dt_tm(dt, s2o=None, o2s=None):
 	if o2s == True:
 		return dt.strftime("%d-%m-%Y:%S-%M-%H")
 
-
-
-@api_view(['GET', 'POST'])
-def ListAll_Add_User(request):
-	data = request.data
-	
-	#to list all users
-	if request.method == "GET":
-		print("\nListAllUser :", data, "\n")
-		
-		li = []
-		for i in models.user.objects.all():
-			li.append([i.username])
-				
-		if len(li) == 0:
-			return Response({}, status=HTTP_204_NO_CONTENT)
-				
-		return Response(li, status=HTTP_200_OK)
-
-	#to add a new user
-	if request.method == "POST":
-		print("\nAddUser :", data, "\n")	
-
-		if type(data['password']) != str or len(data['password']) != 40 or len(data['username']) == 0:
-			return Response({}, status=HTTP_400_BAD_REQUEST)
-
-		try:
-			#to check if it is in hexdigest
-			int(data['password'], 16)
-			c = models.user.objects.create(username=data['username'], password=data['password'])
-			return Response({}, status=HTTP_201_CREATED)
-		
-		except Exception as e:
-			print("Exception :", e)
-			return Response({}, status=HTTP_400_BAD_REQUEST)
-
-
-@api_view(['DELETE'])
-def RemoveUser(request, username):
-	data = request.data
-	print("\nRemoveUser :", data, "\n")	
-	
-	try:
-		models.user.objects.get(pk = username).delete()
-		return Response({}, status=HTTP_200_OK)
-
-	except Exception as e:
-		print("Exception :", e)
-		return Response({}, status=HTTP_400_BAD_REQUEST)
 
 
 @api_view(['GET', 'POST'])
@@ -136,7 +88,7 @@ def ListActsInCategory(request, categoryName, *args, **kwargs):
 		for i in models.act.objects.filter(categoryName=categoryName).order_by('-timestamp'):
 			od = dict()	
 			od['actId'] = i.actId
-			od['username'] = i.username.username
+			od['username'] = i.username
 			od['timestamp'] = dt_tm(i.timestamp, o2s=True)
 			od['caption'] = i.caption
 			od['upvotes'] = i.upvotes
@@ -215,25 +167,55 @@ def UploadAct(request):
 	data = request.data
 	print("\nUploadActs :", data, "\n")	
 
+	#user validation
 	try:
+		users = requests.get("http://users/api/v1/users").text
+	except requests.exceptions.ConnectionError:
+		print("ConnectionError")
+		return Response({}, status = HTTP_400_BAD_REQUEST)
+	
+	try:
+		if data["username"] not in users:
+			print("username not found in", users)
+			return Response({}, status = HTTP_400_BAD_REQUEST)
+	except Exception as e:	
+		print("Exception :", e)
+		return Response({}, status=HTTP_400_BAD_REQUEST)
+	
+	try:
+		#base 64 string validation
 		if base64.b64encode(base64.b64decode(data['imgB64'])).decode() != data['imgB64']:
 			return Response({}, status=HTTP_400_BAD_REQUEST)
 		if not isinstance(data['actId'], int) or 'upvotes' in data:
 			return Response({}, status = HTTP_400_BAD_REQUEST)
-	
-	except Exception as e:	
-		print("Exception :", e)
-		return Response({}, status=HTTP_400_BAD_REQUEST)
-		
-	try:
+
 		formatted_timestamp = dt_tm(data['timestamp'], s2o=True)
 		categoryName = models.category.objects.get(pk=data['categoryName'])
-		username = models.user.objects.get(pk=data['username'])
-		c = models.act.objects.create(actId=int(data['actId']), username=username, timestamp=formatted_timestamp, caption=data['caption'], categoryName=categoryName, imgB64=imgB64)
+		c = models.act.objects.create(actId=int(data['actId']), username=data["username"], timestamp=formatted_timestamp, caption=data['caption'], categoryName=categoryName, imgB64=data['imgB64'])
 		c.categoryName.categoryCount += 1
 		c.categoryName.save()
 		return Response({}, status=HTTP_201_CREATED)
 	
-	except Exception as e:
-		print('\n\n\nException :', e, '\n\n\n')
+	except Exception as e:	
+		print("Exception :", e)
 		return Response({}, status=HTTP_400_BAD_REQUEST)
+
+'''
+{
+"actId": 1234,
+"username": "john_doe",
+"timestamp": "23-12-2323:45-34-22",
+"caption": "caption text",
+"categoryName": "cat1",
+"imgB64": "bGlmZSBpcyBncmVhdA=="
+}
+'''
+
+'''
+curl --header "Content-Type: application/json" \
+	--request POST \
+	--data '{"actId": 1234, "username": "john_doe", "timestamp": "23-12-2323:45-34
+-22", "caption": "caption text", "categoryName": "category_xyz", "imgB64": "bGlm
+ZSBpcyBncmVhdA=="}' \
+	http://users.myNetwork/api/v1/users
+'''

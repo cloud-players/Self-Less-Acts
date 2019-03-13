@@ -26,7 +26,9 @@ The SelfLessActs application will allow users of the application to upload image
 
 ## Steps to install required libraries
 ```$ cd serverfiles```
+
 ```$ sudo apt install python3-pip```
+
 ```$ pip install -r requirements.txt```
 
 ## Steps to build any project from the list of projects/microservices in serverfiles
@@ -40,11 +42,8 @@ The SelfLessActs application will allow users of the application to upload image
 
 Now monolithic REST service is being split up into two microservices - one catering to the user management, and another catering to the act management. These two microservices is being started in separate docker containers, running on one AWS instance. The microservices will talk to each other via their respective REST interfaces.
 
-## To pull alpine:3.7 image
-``` $ docker pull alpine:3.7```
-
 ## Steps to build docker images and publish it into docker_hub repository
-``` $ cd serverfiles/dockerized app-services/<project_name>```
+``` $ cd serverfiles/dockerized_apps/<project_name>```
 
 ``` $ docker build -t <project_name> .```
 
@@ -52,13 +51,14 @@ Now monolithic REST service is being split up into two microservices - one cater
 
 ``` $ docker push <dockerID>/<project_name>:latest```
 
-## Steps to run docker container from remote repository
-``` $ cd serverfiles/dockerized app-services/<project_name>```
+## Steps to create a docker network to have our containers communicate with each other  
+``` $ docker network create <network_name>```
 
-``` $ docker-compose up```
+## Steps to run docker container from remote repository  
+``` $ docker run --network=<network_name> -p <port_no>:80 --name=<project_name> -it <dockerID>/<project_name>:latest```
 
-## To run container in detached (background) mode
-``` $ docker-compose up -d```
+## Steps to run docker container from local repository
+``` $ docker run --network=myNetwork -p <port_no>:80 -it <project_name>```
 
 ## License
 

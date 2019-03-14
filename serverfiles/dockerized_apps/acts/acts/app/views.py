@@ -169,7 +169,7 @@ def UploadAct(request):
 
 	#user validation
 	try:
-		users = requests.get("http://users/api/v1/users").text
+		users = requests.get("http://172.17.0.3:80/api/v1/users","{}").text
 	except requests.exceptions.ConnectionError:
 		print("ConnectionError")
 		return Response({}, status = HTTP_400_BAD_REQUEST)
@@ -215,7 +215,7 @@ def UploadAct(request):
 curl --header "Content-Type: application/json" \
 	--request POST \
 	--data '{"actId": 1234, "username": "john_doe", "timestamp": "23-12-2323:45-34
--22", "caption": "caption text", "categoryName": "category_xyz", "imgB64": "bGlm
+-22", "caption": "caption text", "categoryName": "cat1", "imgB64": "bGlm
 ZSBpcyBncmVhdA=="}' \
-	http://users.myNetwork/api/v1/users
+	http://172.17.0.3:80/api/v1/users
 '''

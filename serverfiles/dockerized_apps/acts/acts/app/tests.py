@@ -11,7 +11,7 @@ data = {
 		'imgB64': 'TWFuIGlzIGRpc3Rpbmd1aXNoZWQsIG5vdCBvb',
 		'categoryName': 'education'
 	}
-data = {'username': 'urNam', 'password': '3d725109c7e7c0bfb9d709836735b56d943d263f'}
+data = {'username': 'john_doe', 'password': '3d725109c7e7c0bfb9d709836735b56d943d263f'}
 data = {}
 response = requests.get(url, data=dumps(data), headers={"Content-Type": "application/json"})
 #response = requests.get(url)

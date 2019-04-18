@@ -11,6 +11,7 @@ from rest_framework.status import *
 import json
 import requests
 
+count_requests = [0]
 #user_service_ip = "http://localhost:8080"
 
 def dt_tm(dt, s2o=None, o2s=None):
@@ -27,6 +28,8 @@ def dt_tm(dt, s2o=None, o2s=None):
 @api_view(['GET', 'POST'])
 def ListAll_Add_Category(request):
 	#to list all the categories
+	global count_requests
+	count_requests[0] += 1
 	if request.method == "GET":
 		print("\nListAllCategory :", request.data, "\n")
 
@@ -58,6 +61,8 @@ def ListAll_Add_Category(request):
 
 @api_view(['DELETE'])
 def RemoveCategory(request, categoryName):
+	global count_requests
+	count_requests[0] += 1
 	data = request.data
 	print("\nRemove category :", data, "\n")	
 	
@@ -72,6 +77,8 @@ def RemoveCategory(request, categoryName):
 
 @api_view(['GET'])
 def ListActsInCategory(request, categoryName, *args, **kwargs):
+	global count_requests
+	count_requests[0] += 1
 	print("\nListActs :", request.data, "\n")	
 	
 	try:
@@ -115,7 +122,23 @@ def ListActsInCategory(request, categoryName, *args, **kwargs):
 
 
 @api_view(['GET'])
+def CountActs(request):
+	#to count number of acts across all categories
+	print('\n CountActs', request.data, '\n')
+	global count_requests
+	count_requests[0] += 1
+
+	n = 0
+	for i in models.category.objects.all():
+		n += i.categoryCount
+
+	return Response([n], status=HTTP_200_OK)
+
+
+@api_view(['GET'])
 def NumberOfActsInCategory(request, categoryName):
+	global count_requests
+	count_requests[0] += 1
 	print("\n NumberOfActsInCategory :", request.data, "\n")	
 	
 	try:
@@ -128,6 +151,8 @@ def NumberOfActsInCategory(request, categoryName):
 
 @api_view(['POST'])
 def UpvoteAct(request):
+	global count_requests
+	count_requests[0] += 1
 	data = request.data
 	print("\n UpvoteAct :", data, "\n")	
 	
@@ -147,6 +172,8 @@ def UpvoteAct(request):
 
 @api_view(['DELETE'])
 def RemoveAct(request, actId):
+	global count_requests
+	count_requests[0] += 1
 	data = request.data
 	print("\nRemoveAct :", data, "\n")	
 	
@@ -164,12 +191,15 @@ def RemoveAct(request, actId):
 
 @api_view(['POST'])
 def UploadAct(request):
+	global count_requests
+	count_requests[0] += 1
 	data = request.data
 	print("\nUploadActs :", data, "\n")	
 
 	#user validation
 	try:
-		users = requests.get("http://172.17.0.3:80/api/v1/users","{}").text
+		headers = {'Origin':'public_ip'}
+		users = requests.get("http://100.25.106.87/api/v1/users",data="{}", headers=headers).text
 	except requests.exceptions.ConnectionError:
 		print("ConnectionError")
 		return Response({}, status = HTTP_400_BAD_REQUEST)
@@ -199,6 +229,19 @@ def UploadAct(request):
 	except Exception as e:	
 		print("Exception :", e)
 		return Response({}, status=HTTP_400_BAD_REQUEST)
+
+
+@api_view(['GET', 'DELETE'])
+def count(request):
+	global count_requests
+	print("\ncount request received", request.data, '\n')
+
+	if request.method == 'GET':
+		return Response(count_requests, status=HTTP_200_OK)
+
+	if request.method == 'DELETE':
+		count_requests = [0]
+		return Response({}, status=HTTP_200_OK)
 
 '''
 {

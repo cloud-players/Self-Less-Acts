@@ -19,10 +19,12 @@ from app.views import *
 
 urlpatterns = [
 	path('admin/', admin.site.urls),
+	path('api/v1/_count', count, name='count'),
 	path('api/v1/categories', ListAll_Add_Category, name='ListAll_Add_Category'),
 	path('api/v1/categories/<categoryName>/acts/size', NumberOfActsInCategory, name='NumberOfActsInCategory'),
 	path('api/v1/categories/<categoryName>/acts', ListActsInCategory, name='ListActsInCategory'),
 	path('api/v1/categories/<categoryName>', RemoveCategory, name='RemoveCategory'),  	
+	path('api/v1/acts/count', CountActs, name='CountActs'),
 	path('api/v1/acts/upvote', UpvoteAct, name='UpvoteAct'),
 	path('api/v1/acts/<actId>', RemoveAct, name='RemoveAct'),
 	path('api/v1/acts', UploadAct, name='UploadAct')

@@ -30,8 +30,7 @@ def ListAll_Add_User(request):
 		if len(li) == 0:
 			return Response({}, status=HTTP_204_NO_CONTENT)
 				
-		return Response(li, status=HTTP_200_OK)
-
+		return Response(json.dumps(li), status=HTTP_200_OK)
 	#to add a new user
 	if request.method == "POST":
 		print("\nAddUser :", data, "\n")	

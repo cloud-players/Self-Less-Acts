@@ -20,6 +20,8 @@ from app.views import *
 urlpatterns = [
 	path('admin/', admin.site.urls),
 	path('api/v1/_count', count, name='count'),
+	path('api/v1/_health', health, name='health'),
+	path('api/v1/_crash', crash, name='crash'),
 	path('api/v1/categories', ListAll_Add_Category, name='ListAll_Add_Category'),
 	path('api/v1/categories/<categoryName>/acts/size', NumberOfActsInCategory, name='NumberOfActsInCategory'),
 	path('api/v1/categories/<categoryName>/acts', ListActsInCategory, name='ListActsInCategory'),
